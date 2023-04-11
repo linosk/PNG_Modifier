@@ -1,42 +1,20 @@
-#include <fstream>
 #include <iostream>
-#include <string>
 
-typedef unsigned char PNG_Byte;
-#define SIGNATURE_BLOCK_SIZE 8
-#define STANDARD_CHUNK_PART_SIZE 4
-PNG_Byte Correct_signature[SIGNATURE_BLOCK_SIZE] = {137,80,78,71,13,10,26,10};
-
-class PNG_Chunk{
-    public:
-        PNG_Byte Data_length_bytes[STANDARD_CHUNK_PART_SIZE];
-        int Data_length;
-        PNG_Byte Type_bytes[STANDARD_CHUNK_PART_SIZE];
-
-};
-
-int Sum_chunks(PNG_Byte* Data_length_bytes, int Length){
-    int Data_length = 0;
-    for(int i=0;i<Length;i++){
-        Data_length += Data_length_bytes[i];
-    }
-    return Data_length;
-}
-
-template <typename T>
-void Print_values(T Array,int Length){
-    for(int i=0;i<Length;i++){
-        std::cout<<static_cast<int>(static_cast<unsigned char>(Array[i]))<<" ";
-    }
-    std::cout<<std::endl;
-}
-
-//void Print_values(){
-//    
-//}
+#include "png_chunk.h"
 
 int main(int argc, char** argv){
 
+    PNG_Byte A[STANDARD_CHUNK_PART_SIZE] = {0xff,0xff,0xff,0xff};
+    //Print_values(A,STANDARD_CHUNK_PART_SIZE);
+
+    //std::cout<<A[3]+A[2]+A[1]*0xff+A[0]<<std::endl;
+
+    std::cout<<static_cast<unsigned int>(A[0]*pow(0x100,0))<<std::endl;
+    std::cout<<static_cast<unsigned int>(A[1]*pow(0x100,1))<<std::endl;
+    std::cout<<static_cast<unsigned int>(A[2]*pow(0x100,2))<<std::endl;
+    std::cout<<static_cast<unsigned int>(A[3]*pow(0x100,3))<<std::endl;
+
+/*
     //Later the filename can be passed as an argument
 
     std::ifstream File("block.png");
@@ -70,6 +48,7 @@ int main(int argc, char** argv){
     std::cout<<Image_header_chunk.Data_length<<std::endl;
 
     File.close();
+    */
 
     return 0;
 }
