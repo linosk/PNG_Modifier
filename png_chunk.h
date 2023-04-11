@@ -4,22 +4,26 @@
 #include <cstdint>
 #include <cmath>
 
-typedef unsigned char PNG_Byte;
+//namespace png{
 
-#define SIGNATURE_BLOCK_SIZE 8
-#define STANDARD_CHUNK_PART_SIZE 4
-//PNG_Byte Correct_signature[SIGNATURE_BLOCK_SIZE];
+    typedef unsigned char PNG_Byte;
 
-//class PNG_Chunk{
-//        PNG_Byte Data_length_bytes[STANDARD_CHUNK_PART_SIZE];
-//        int Data_length;
-//        PNG_Byte Type_bytes[STANDARD_CHUNK_PART_SIZE];
-//        };
+    #define SIGNATURE_BLOCK_SIZE 8
+    #define STANDARD_CHUNK_PART_SIZE 4
+    #define CORRECT_PNG_SIGNATURE {137,80,78,71,13,10,26,10}
 
-//maybe use templates later
-u_int32_t Sum_chunks(PNG_Byte* Data_length_bytes, int Length);
+    class PNG_Chunk{
+            public:
+                PNG_Byte Data_length_bytes[STANDARD_CHUNK_PART_SIZE];
+                int Data_length;
+                PNG_Byte Type_bytes[STANDARD_CHUNK_PART_SIZE];
+            };
 
-void Print_values(PNG_Byte* Array, int Length);
+    //maybe use templates later
+    u_int32_t Sum_chunks(PNG_Byte* Data_length_bytes, int Length);
+    void Print_values(PNG_Byte* Array, int Length);
+
+//}
 
 #endif
 

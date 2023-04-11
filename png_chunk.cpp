@@ -2,9 +2,14 @@
 
 #include "png_chunk.h"
 
+PNG_Chunk::PNG_Chunk(){
+
+}
+
+
 //class PNG_Chunk{
 //    public:
-//        PNG_Byte Data_length_bytes[STANDARD_CHUNK_PART_SIZE];
+//        PNG_Byte Data_length_bytes[STANDARD_CHUNK_PART_SIZE];n
 //        int Data_length;
 //        PNG_Byte Type_bytes[STANDARD_CHUNK_PART_SIZE];
 //
@@ -16,9 +21,12 @@
 //        int Data_length;
 //        PNG_Byte Type_bytes[STANDARD_CHUNK_PART_SIZE];
 //}
+
+/*
+
 u_int32_t Sum_chunks(PNG_Byte* Data_length_bytes, int Length){
-    u_int32_t Data_length = 0;
-    uint8_t Power = 3;
+    u_int32_t Data_length = 0x0;
+    uint8_t Power = Length - 1;
 
     for(uint8_t i=0;i<Length;i++){
         Data_length += Data_length_bytes[i]*pow(0x100,Power);
@@ -34,3 +42,5 @@ void Print_values(PNG_Byte* Array, int Length){
     }
     std::cout<<std::endl;
 }
+
+*/
