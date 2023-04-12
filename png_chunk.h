@@ -10,7 +10,6 @@
 
     #define SIGNATURE_BLOCK_SIZE 8
     #define STANDARD_CHUNK_PART_SIZE 4
-    #define CORRECT_PNG_SIGNATURE {137,80,78,71,13,10,26,10}
 
     class PNG_Chunk{
             public:
