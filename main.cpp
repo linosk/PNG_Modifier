@@ -9,8 +9,8 @@ int main(int argc, char** argv){
         exit(0);
     }
 
-    PNG_Place_Holder PNG;
-    PNG.PNG_Get_Bytes(argv[1]);
+    PNG_place_holder PNG;
+    PNG.PNG_get_bytes(argv[1]);
 
     return 0;
 }

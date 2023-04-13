@@ -4,7 +4,7 @@
 
 #include "png_place_holder.h"
 
-void PNG_Place_Holder::PNG_Get_Bytes(std::string File_name){
+void PNG_place_holder::PNG_get_bytes(std::string File_name){
 
     size_t Size;
 
@@ -14,29 +14,38 @@ void PNG_Place_Holder::PNG_Get_Bytes(std::string File_name){
         File.seekg(0,std::ios::end);
         Size = File.tellg();
         File.seekg(0,std::ios::beg);
-        PNG_File = new PNG_Byte[Size];
-        File.read(reinterpret_cast<char*>(PNG_File),Size);
+        PNG_file = new PNG_byte[Size];
+        File.read(reinterpret_cast<char*>(PNG_file),Size);
         File.close();
 
         //This should be in header
-        PNG_Byte Correct_Signature[SIGNATURE_BLOCK_SIZE] = {137,80,78,71,13,10,26,10};
+        PNG_byte Correct_signature[SIGNATURE_BLOCK_SIZE] = {137,80,78,71,13,10,26,10};
 
         //Is loop ok?
         for(uint8_t i = 0; i<SIGNATURE_BLOCK_SIZE; i++){
-            if(Correct_Signature[i]!=PNG_File[i]){
+            if(Correct_signature[i]!=PNG_file[i]){
                 std::cerr<<File_name+" is not correct .png file, incorrect."<<std::endl;
-                delete PNG_File;
+                delete PNG_file;
                 exit(1);
             }
 
         }
+
+        
 
     }
     else{
         std::cerr<<"File "+File_name+" does not exist."<<std::endl;
         exit(1);
     }
+
+
 }
+
+void PNG_place_holder::PNG_get_chunk(PNG_chunk Chunk){
+    
+}
+
 
 //PNG_Place_Holder::PNG_Place_Holder(){
 //

@@ -6,21 +6,32 @@
 
 //namespace png{
 
-    typedef unsigned char PNG_Byte;
+    typedef unsigned char PNG_byte;
 
     #define SIGNATURE_BLOCK_SIZE 8
     #define STANDARD_CHUNK_PART_SIZE 4
 
-    class PNG_Chunk{
+    class PNG_chunk{
             public:
-                PNG_Byte Data_length_bytes[STANDARD_CHUNK_PART_SIZE];
+                PNG_byte Data_length_bytes[STANDARD_CHUNK_PART_SIZE];
                 int Data_length;
-                PNG_Byte Type_bytes[STANDARD_CHUNK_PART_SIZE];
+                PNG_byte Type_bytes[STANDARD_CHUNK_PART_SIZE];
+                PNG_byte* Chunk_data;
+                PNG_byte CRC_bytes[STANDARD_CHUNK_PART_SIZE];
+
+                PNG_chunk(
+                    PNG_byte* Data_length_bytes,
+                    int Data_length,
+                    PNG_byte* Type,
+                    PNG_byte* Chunk_data,
+                    PNG_byte* CRC_bytes
+                    );
+
+                u_int32_t Sum_chunks(PNG_byte* Data_length_bytes, int Length){u_int32_t Data_length;};
+                void Print_values(PNG_byte* Array, int Length);
             };
 
     //maybe use templates later
-    u_int32_t Sum_chunks(PNG_Byte* Data_length_bytes, int Length);
-    void Print_values(PNG_Byte* Array, int Length);
 
 //}
 
