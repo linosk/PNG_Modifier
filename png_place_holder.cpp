@@ -6,13 +6,12 @@
 
 void PNG_place_holder::PNG_get_bytes(std::string File_name){
 
-    size_t Size;
-
     if(std::filesystem::exists(File_name)){
         // Maybe there should be another check whether the png.file is actually png
         std::ifstream File(File_name);
         File.seekg(0,std::ios::end);
         Size = File.tellg();
+        Pointer = 0;
         File.seekg(0,std::ios::beg);
         PNG_file = new PNG_byte[Size];
         File.read(reinterpret_cast<char*>(PNG_file),Size);
@@ -31,7 +30,8 @@ void PNG_place_holder::PNG_get_bytes(std::string File_name){
 
         }
 
-        
+        //If program still runs move pointer by the length of signature
+        Pointer+= SIGNATURE_BLOCK_SIZE;
 
     }
     else{
@@ -42,7 +42,7 @@ void PNG_place_holder::PNG_get_bytes(std::string File_name){
 
 }
 
-void PNG_place_holder::PNG_get_chunk(PNG_chunk Chunk){
+void PNG_place_holder::PNG_assign_bytes(){
     
 }
 
