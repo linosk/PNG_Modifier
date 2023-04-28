@@ -1,6 +1,7 @@
 block.png
 .vscode
-build/
 /TEST
 /CRC
 /PH
+/ETWAS
+/build
