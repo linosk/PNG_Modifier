@@ -1,25 +1,11 @@
-#include <iostream>
-
 #include "png_chunk.h"
 
-PNG_chunk::PNG_chunk(
-                    PNG_byte* Data_length_bytes,
-                    int Data_length,
-                    PNG_byte* Type,
-                    PNG_byte* Chunk_data,
-                    PNG_byte* CRC_bytes
-                    ){
-    //function to copy from PNG_file to singular chunks
-    //Data_length = Sum_chunks(Data_length_bytes, STANDARD_CHUNK_PART_SIZE);
+void PNG_chunk::PNG_get_chunk(PNG_byte* PNG_file, PNG_byte* PNG_chunk_header, std::string PNG_header_name, size_t &Counter){
+    //TODO
 }
 
-u_int32_t PNG_chunk::Sum_chunks(PNG_byte* Data_length_bytes, int Length){
-    u_int32_t Data_length = 0x0;
-    uint8_t Power = Length - 1;
-    for(uint8_t i=0;i<Length;i++){
-        Data_length += Data_length_bytes[i]*pow(0x100,Power);
-        Power--;
+void PNG_copy(PNG_byte* Copy, uint8_t Beg, uint8_t Range, PNG_byte* Copy_to){
+    for(uint8_t i = 0; i<Range; i++){
+        Copy_to[i] = static_cast<unsigned char>(Copy[Beg+i]);
     }
-
-    return Data_length;
 }
