@@ -20,6 +20,8 @@ class PNG_chunk{
         void PNG_get_chunk(PNG_byte* PNG_file, PNG_byte* PNG_chunk_header, std::string PNG_header_name, size_t &Counter);
 };
 
+bool PNG_compare(PNG_byte* Compare, uint8_t Beg, uint8_t Range, PNG_byte* Compare_to);
+
 //Copy from one PNG_byte array to the other in given range
 void PNG_copy(PNG_byte* Copy, uint8_t Beg, uint8_t Range, PNG_byte* Copy_to);
 
