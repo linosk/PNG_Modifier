@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "include/png_chunk.h"
+#include "png_chunk.h"
 
 TEST(Test_PNG_copy,test){
     PNG_byte Array_one[CHUNK_SIZE];
