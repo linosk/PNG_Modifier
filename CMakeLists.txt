@@ -1,35 +1,19 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project(pngmodifier CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CXX _STANDARD 17)
+project(PNGModfier VERSION 1.0)
+add_executable(pngmodifier src/main.cpp src/png_chunk.cpp)
 
-#enable_testing()
+target_include_directories(pngmodifier PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-#add_subdirectory(tests)
+#OG
+#https://www.youtube.com/watch?v=mKZ-i-UfGgQ&ab_channel=kandodev
+
+#project(pngmodifier VERSION 0.0.1 LANGUAGES CXX)
 
 #https://www.youtube.com/watch?v=Lp1ifh9TuFI&t=912s&ab_channel=Rhymu%27sVideos
-#add_library($)
-
-#include_directories(include, src)
-
-#set(Headers
-#    include/png_chunk.h
-#)
 
 #THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#https://www.youtube.com/watch?v=BCY3gagHX8w&ab_channel=LearnQtGuide
-
-set(SOURCES
-    png_chunk.cpp
-    main.cpp
-)
-
-add_executable(${NAME})
-
-target_sources(${NAME} PRIVATE ${SOURCES})
-
-target_include_directories(${NAME} PRIVATE include)
-#add_library(${This} STATIC ${Sources} ${Headers})
-
-#add_executable(${PROJECT_NAME} main.cpp)
+#https://www.youtube.com/watch?v=BCY3gagHX8w&ab_channel=LearnQtGuidecd w
