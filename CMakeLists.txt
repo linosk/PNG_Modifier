@@ -6,11 +6,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(PNGModfier VERSION 1.0)
 
 #add_library(pngchunk STATIC src/png_chunk.cpp)
-add_executable(pngmodifier src/main.cpp src/png_chunk.cpp)
+add_executable(pngmodifier 
+                src/main.cpp 
+                src/png_chunk.cpp 
+                src/png_place_holder.cpp)
 
 #target_link_libraries(pngmodifier png_chunk)
 target_include_directories(pngmodifier PUBLIC include)
 
+#TESTING SHOULD BE LATER DONE BY CTEST - MAYBE?
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -23,7 +27,11 @@ if(NOT googletest_POPULATED)
     add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BUILD_DIR})
 endif()
 
-add_executable(testpngmodifier tests/test_png_chunk.cpp src/png_chunk.cpp)
+add_executable(testpngmodifier 
+                tests/test_png_chunk.cpp 
+                src/png_chunk.cpp 
+                tests/test_png_place_holder.cpp 
+                src/png_place_holder.cpp)
 
 target_link_libraries(testpngmodifier gtest_main gmock_main)
 
