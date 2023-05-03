@@ -4,10 +4,6 @@
 
 int main(int argc, char** argv){
 
-    //PNG_chunk P;
-    //Use \n instead of std::endl becasues the latter also flushes
-    //std::cout<<"A"<<"\n";
-
     if (argc!=2){
         std::cout<<"Run ./png_modifier [file.png]"<<std::endl;
         exit(0);
