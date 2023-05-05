@@ -12,13 +12,14 @@ void PNG_place_holder::PNG_get_bytes(std::string File_name){
         Size = File.tellg();
         Pointer = 0;
         File.seekg(0,std::ios::beg);
-        PNG_file = new PNG_byte[Size];
-        File.read(reinterpret_cast<char*>(PNG_file),Size);
+        //PNG_file = new PNG_byte[Size];
+        //File.read(reinterpret_cast<char*>(PNG_file),Size);
+        PNG_file.resize(Size);
+        File.read((char*)&PNG_file[0],Size);
         File.close();
 
         if(!PNG_compare(PNG_file,0,BYTE_SIZE,Correct_signature)){
             std::cerr<<File_name+" is not correct .png file, incorrect signature."<<std::endl;
-            delete PNG_file;
             exit(1);
         }
 
