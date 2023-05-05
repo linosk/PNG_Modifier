@@ -21,6 +21,8 @@ add_executable(pngmodifier
 
 target_include_directories(pngmodifier PUBLIC include)
 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+
 #TESTING SHOULD BE LATER DONE BY CTEST - MAYBE?
 include(FetchContent)
 FetchContent_Declare(
