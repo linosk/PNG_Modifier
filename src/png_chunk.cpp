@@ -51,7 +51,8 @@ bool PNG_compare(const std::vector<PNG_byte> Compare, uint8_t Beg, uint8_t Range
     return true;
 }
 
-void PNG_copy(const std::vector<PNG_byte> Copy, uint8_t Beg, uint8_t Range, std::vector<PNG_byte> Copy_to){
+void PNG_copy(const std::vector<PNG_byte> Copy, uint8_t Beg, uint8_t Range, std::vector<PNG_byte> &Copy_to){
+    Copy_to.resize(Range);
     for(uint8_t i = 0; i<Range; i++){
         Copy_to[i] = static_cast<unsigned char>(Copy[Beg+i]);
     }

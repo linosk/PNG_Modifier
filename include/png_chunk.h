@@ -35,7 +35,7 @@ void PNG_print(const std::vector<PNG_byte> Array);
 bool PNG_compare(const std::vector<PNG_byte> Compare, uint8_t Beg, uint8_t Range, const std::vector<PNG_byte> Compare_to);
 
 //Copy from one PNG_byte array to the other in given range
-void PNG_copy(const std::vector<PNG_byte> Copy, uint8_t Beg, uint8_t Range, std::vector<PNG_byte> Copy_to);
+void PNG_copy(const std::vector<PNG_byte> Copy, uint8_t Beg, uint8_t Range, std::vector<PNG_byte> &Copy_to);
 
 u_int32_t PNG_sum_chunks(const std::vector<PNG_byte> Data_length_bytes);
 
