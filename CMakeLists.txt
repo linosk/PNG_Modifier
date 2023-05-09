@@ -8,11 +8,15 @@ project(PNGModfier VERSION 1.0)
 
 set(Sources
     src/png_chunk.cpp
-    src/png_place_holder.cpp)
+    src/png_place_holder.cpp
+    src/crc.cpp
+    )
 
 set(Tests
     tests/test_png_chunk.cpp
-    tests/test_png_place_holder.cpp)
+    tests/test_png_place_holder.cpp
+    tests/test_crc.cpp
+    )
 
 add_executable(pngmodifier 
                 src/main.cpp 
@@ -20,6 +24,8 @@ add_executable(pngmodifier
                 )
 
 target_include_directories(pngmodifier PUBLIC include)
+
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
 #TESTING SHOULD BE LATER DONE BY CTEST - MAYBE?
 include(FetchContent)

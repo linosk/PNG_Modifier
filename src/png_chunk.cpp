@@ -1,7 +1,7 @@
 #include "png_chunk.h"
 
 //How to test this?
-void PNG_chunk::PNG_get_chunk(std::vector<PNG_byte> PNG_file, const std::vector<PNG_byte> PNG_chunk_header, std::string PNG_header_name, size_t &Counter){
+void PNG_chunk::PNG_get_chunk(PNG_array PNG_file, const PNG_array PNG_chunk_header, std::string PNG_header_name, size_t &Counter){
     //Copying bytes about data length
     PNG_copy(PNG_file,Counter,CHUNK_SIZE,Data_length_bytes);
     Counter+=CHUNK_SIZE;
@@ -12,7 +12,7 @@ void PNG_chunk::PNG_get_chunk(std::vector<PNG_byte> PNG_file, const std::vector<
     PNG_copy(PNG_file,Counter,CHUNK_SIZE,Type_bytes);
     Counter+=CHUNK_SIZE;
     if(!PNG_compare(Type_bytes,0,CHUNK_SIZE,PNG_chunk_header)){
-        std::cerr<<PNG_header_name+" header does not match."<<std::endl;
+        std::cerr<<PNG_header_name+" header does not match."<<"\n";
         exit(1);
     }
     PNG_print(Type_bytes);
@@ -32,7 +32,7 @@ void PNG_chunk::PNG_get_chunk(std::vector<PNG_byte> PNG_file, const std::vector<
     //
 }
 
-void PNG_print(const std::vector<PNG_byte> Array){    
+void PNG_print(const PNG_array Array){    
     for(uint8_t i = 0; i<Array.size();i++){
         std::cout<<static_cast<unsigned int>(Array[i])<<" ";
     }
@@ -43,7 +43,7 @@ void PNG_print(const std::vector<PNG_byte> Array){
 //Write a test
 //Maybe templetize it
 //bool PNG_compare(PNG_byte* Compare, uint8_t Beg, uint8_t Range, PNG_byte* Compare_to){
-bool PNG_compare(const std::vector<PNG_byte> Compare, uint8_t Beg, uint8_t Range, const std::vector<PNG_byte> Compare_to){
+bool PNG_compare(const PNG_array Compare, uint8_t Beg, uint8_t Range, const PNG_array Compare_to){
     for(uint8_t i = 0; i<Range; i++){
         if(Compare[Beg+i]!=Compare_to[i])
             return false;
@@ -51,13 +51,14 @@ bool PNG_compare(const std::vector<PNG_byte> Compare, uint8_t Beg, uint8_t Range
     return true;
 }
 
-void PNG_copy(const std::vector<PNG_byte> Copy, uint8_t Beg, uint8_t Range, std::vector<PNG_byte> Copy_to){
+void PNG_copy(const PNG_array Copy, uint8_t Beg, uint8_t Range, PNG_array &Copy_to){
+    Copy_to.resize(Range);
     for(uint8_t i = 0; i<Range; i++){
         Copy_to[i] = static_cast<unsigned char>(Copy[Beg+i]);
     }
 }
 
-u_int32_t PNG_sum_chunks(const std::vector<PNG_byte> Data_length_bytes){
+u_int32_t PNG_sum_chunks(const PNG_array Data_length_bytes){
     u_int32_t Data_length = 0x0;
     uint8_t Length = Data_length_bytes.size();
     uint8_t Power = Length - 1;

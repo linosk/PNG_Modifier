@@ -5,7 +5,7 @@
 int main(int argc, char** argv){
 
     if (argc!=2){
-        std::cout<<"Run ./png_modifier [file.png]"<<std::endl;
+        std::cout<<"Run ./png_modifier [file.png]"<<"\n";
         exit(0);
     }
 
