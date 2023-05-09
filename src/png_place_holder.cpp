@@ -19,7 +19,7 @@ void PNG_place_holder::PNG_get_bytes(std::string File_name){
         File.close();
 
         if(!PNG_compare(PNG_file,0,BYTE_SIZE,Correct_signature)){
-            std::cerr<<File_name+" is not correct .png file, incorrect signature."<<std::endl;
+            std::cerr<<File_name+" is not correct .png file, incorrect signature."<<"\n";
             exit(1);
         }
 
@@ -28,7 +28,7 @@ void PNG_place_holder::PNG_get_bytes(std::string File_name){
     }
 
     else{
-        std::cerr<<"File "+File_name+" does not exist."<<std::endl;
+        std::cerr<<"File "+File_name+" does not exist."<<"\n";
         exit(1);
     }
 }

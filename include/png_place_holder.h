@@ -16,9 +16,9 @@ class PNG_place_holder{
         //void PNG_get_bytes(std::string File_name);
         //PNG_chunk IHDR;
 
-        std::vector<PNG_byte> Correct_signature = {137,80,78,71,13,10,26,10};
-        std::vector<PNG_byte> IHDR_header = {'I','H','D','R'};
-        std::vector<PNG_byte> PNG_file{};
+        PNG_array Correct_signature = {137,80,78,71,13,10,26,10};
+        PNG_array IHDR_header = {'I','H','D','R'};
+        PNG_array PNG_file{};
         size_t Pointer;
         void PNG_get_bytes(std::string File_name);
         PNG_chunk IHDR;
