@@ -4,9 +4,7 @@ namespace crc{
 
     void Print_binary(const Bin_arr Binary){
 
-        //change to int i : Binary
-        //for(int i=0;i<Binary.size();i++){
-        for(int i : Binary){
+        for(int i = 0 ;i<Binary.size();i++){
             std::cout<<static_cast<int>(Binary[i]);
             if((i+1)%8==0)
                 std::cout<<" ";
