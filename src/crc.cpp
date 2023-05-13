@@ -57,4 +57,39 @@ namespace crc{
 
     }
 
+    void Reverse_binary(Bin_arr &Binary){
+
+        Bin_arr Tmp{};
+        Tmp.resize(Binary.size());
+        crc::Copy_binary(Binary,Tmp,Binary.size(),0,0);
+
+        for(int i=0,j = Binary.size()-1;i<Binary.size();i++,j--){
+            Binary[i] = Tmp[j];
+        }
+
+    }
+
+    void Add_zeros(Bin_arr &Binary, int Number_of_zeros){
+
+        int Length = Binary.size();
+        crc::Reverse_binary(Binary);
+        Binary.resize(Length+Number_of_zeros);
+        for(int i = Length; i<Length+Number_of_zeros-1 ; i++){
+            Binary[i] = 0;
+        }
+        crc::Reverse_binary(Binary);
+
+    }
+
+    void Flip_binary(Bin_arr &Binary, int Shift){
+
+        for(int i = Shift; i<Binary.size();i++){
+            if(Binary[i]==1)
+                Binary[i] = 0;
+            else
+                Binary[i] = 1;
+        }
+
+    }
+
 }
