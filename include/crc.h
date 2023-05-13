@@ -1,11 +1,14 @@
 #ifndef __CRC_H__
 #define __CRC_H__
 
-#include <png_chunk.h>
+#include <vector>
+#include <iostream>
 
 namespace crc{
     
-    typedef std::vector<PNG_byte> Bin_arr;
+    #define BYTE_SIZE 8
+
+    typedef std::vector<unsigned char> Bin_arr;
 
     void Print_binary(const Bin_arr Binary);
 
@@ -14,7 +17,7 @@ namespace crc{
     void Copy_binary(const Bin_arr From, Bin_arr &To, int Numbers_of_bits, int Shift_from, int Shift_to);
 
     //The whole CRC calculation should be turned to hex
-    Bin_arr To_binary(int Number, int Shift);
+    void To_binary(int Number, int Shift, Bin_arr &Binary);
 
 }
 

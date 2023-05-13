@@ -16,5 +16,12 @@ int main(int argc, char** argv){
     crc::Bin_arr A = {1,0,1};
     crc::Print_binary(A);
 
+    crc::Bin_arr Binary_three{};
+    crc::Bin_arr Binary_three_compare = {0,0,0,0,1,1,1,1,0,0,0,1,0,0,0,0};
+    crc::To_binary(2288,1,Binary_three);
+
+    crc::Print_binary(Binary_three);
+    crc::Print_binary(Binary_three_compare);
+
     return 0;
 }
