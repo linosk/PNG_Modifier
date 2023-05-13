@@ -13,5 +13,8 @@ int main(int argc, char** argv){
     PNG.PNG_get_bytes(argv[1]);
     PNG.IHDR.PNG_get_chunk(PNG.PNG_file, PNG.IHDR_header, "IHDR", PNG.Pointer);
 
+    crc::Bin_arr A = {1,0,1};
+    crc::Print_binary(A);
+
     return 0;
 }
