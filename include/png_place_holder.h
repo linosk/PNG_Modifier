@@ -2,6 +2,7 @@
 #define __PNG_PLACE_HOLDER__
 
 #include "png_chunk.h"
+#include "crc.h"
 
 class PNG_place_holder{
     private:
