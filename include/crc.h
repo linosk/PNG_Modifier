@@ -7,8 +7,6 @@ namespace crc{
     
     typedef std::vector<PNG_byte> Bin_arr;
 
-    int a =0 ;
-
     void Print_binary(const Bin_arr Binary);
 
     bool Compare_binaries(const Bin_arr Binary_one, const Bin_arr Binary_two, int Bits);
