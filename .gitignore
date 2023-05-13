@@ -6,5 +6,4 @@ block.png
 /ETWAS
 /build
 knowledge.txt
-*.cpp
-*.h
+/XD
