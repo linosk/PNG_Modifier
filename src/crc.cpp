@@ -29,15 +29,15 @@ namespace crc{
 
     }
 
-    Bin_arr To_binary(int Number, int Shift){
+    void To_binary(int Number, int Shift, Bin_arr &Binary){
         
-        if (Number<0 || Number>255){
+        if (Number<0){
             std::cerr<<"ERROR"<<std::endl;
             exit(0);
         }
 
-        Bin_arr Binary{};
-        Binary.resize(BYTE_SIZE);
+        int Length = BYTE_SIZE + Shift*BYTE_SIZE;
+        Binary.resize(Length);
         int Counter = 0;
 
         while (Number)
@@ -50,17 +50,10 @@ namespace crc{
             Counter++;
         }
 
-        for(int i=0;i<Counter;i++){
-            Binary[i+Shift] = Binary[i];
-            Binary[i] = 0;
-        }
-    
         for(int j=Counter;j<BYTE_SIZE;j++){
             Binary[j+Shift] = 0;
             Binary[j] = 0;
         }
-
-        return Binary;
 
     }
 

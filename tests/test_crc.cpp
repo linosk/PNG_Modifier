@@ -36,3 +36,17 @@ TEST(TEST_crc, Copy_binary){
 
     EXPECT_TRUE(crc::Compare_binaries(Binary_copy_to_two,Binary_compare_with_two,BYTE_SIZE/2));
 }
+
+TEST(TEST_crc, To_binary){
+
+    crc::Bin_arr Binary_two{};
+    crc::Bin_arr Binary_two_compare = {1,0,0,1,0,0,1,0};
+    crc::To_binary(73,0,Binary_two);
+    EXPECT_TRUE(crc::Compare_binaries(Binary_two,Binary_two_compare,BYTE_SIZE));
+
+    crc::Bin_arr Binary_three{};
+    crc::Bin_arr Binary_three_compare = {0,0,0,0,1,1,1,1,0,0,0,1,0,0,0,0};
+    crc::To_binary(2288,1,Binary_three);
+    EXPECT_TRUE(crc::Compare_binaries(Binary_three,Binary_three_compare,BYTE_SIZE));
+
+}
