@@ -36,7 +36,3 @@ TEST(TEST_crc, Copy_binary){
 
     EXPECT_TRUE(crc::Compare_binaries(Binary_copy_to_two,Binary_compare_with_two,BYTE_SIZE/2));
 }
-
-//TEST(TEST_crc, To_binary){
-//
-//}
