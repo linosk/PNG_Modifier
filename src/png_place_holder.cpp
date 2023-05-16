@@ -3,6 +3,14 @@
 #include <filesystem>
 #include <fstream>
 
+PNG_place_holder::PNG_place_holder(std::string File_name){
+
+    PNG_get_bytes(File_name);
+    IHDR.PNG_get_chunk(PNG_file,IHDR_header, "IHDR", Pointer);
+    Check_CRC(IHDR.Type_bytes,IHDR.Chunk_data,IHDR.CRC_bytes);
+    
+}
+
 void PNG_place_holder::PNG_get_bytes(std::string File_name){
     // Maybe there should be another check whether the png.file is actually png
     // Remember that std::filesystem requires -std=c++17 and c_cpp_properties.json
@@ -31,4 +39,25 @@ void PNG_place_holder::PNG_get_bytes(std::string File_name){
         std::cerr<<"File "+File_name+" does not exist."<<"\n";
         exit(1);
     }
+
+}
+
+bool PNG_place_holder::Check_CRC(const PNG_array Type_bytes, const PNG_array Chunk_data, const PNG_array CRC_bytes){
+
+    int Data_length = Type_bytes.size() + Chunk_data.size();
+    PNG_array Data = PNG_connect(Type_bytes,Chunk_data);
+
+    PNG_print(Data);
+
+    crc::Bin_arr Polyniomal = {1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,1,1,1,0,1,1,0,1,1,0,1,1,1};
+    
+    crc::Bin_arr Binary{};
+    Binary.resize(Data_length*BYTE_SIZE);
+    for(int i =0, j=0;i<Data_length*BYTE_SIZE;i+=BYTE_SIZE,j++){
+        std::cout<<static_cast<unsigned int>(Data[i])<<"\n";
+        crc::To_binary(Data[j],i,Binary);
+    }
+
+    crc::Print_binary(Binary);
+
 }

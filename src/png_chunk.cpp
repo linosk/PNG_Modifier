@@ -58,6 +58,29 @@ void PNG_copy(const PNG_array Copy, uint8_t Beg, uint8_t Range, PNG_array &Copy_
     }
 }
 
+PNG_array PNG_connect(const PNG_array First, const PNG_array Second){
+
+    PNG_array New{};
+    New.resize(First.size()+Second.size());
+
+    int i = 0;
+    int j = 0;
+
+    while (i<First.size())
+    {
+        New[i] = First[i];
+        i++;
+    }
+    
+    while (j<Second.size())
+    {
+        New[i+j] = Second[j];
+        j++;
+    }
+
+    return New;
+}
+
 u_int32_t PNG_sum_chunks(const PNG_array Data_length_bytes){
     u_int32_t Data_length = 0x0;
     uint8_t Length = Data_length_bytes.size();

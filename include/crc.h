@@ -17,7 +17,7 @@ namespace crc{
     void Copy_binary(const Bin_arr From, Bin_arr &To, int Numbers_of_bits, int Shift_from, int Shift_to);
 
     //The whole CRC calculation may be turned to hex
-    void To_binary(int Number, int Shift, Bin_arr &Binary);
+    void To_binary(const int Number, const int Shift, Bin_arr &Binary);
 
     void Reverse_binary(Bin_arr &Binary);
 
@@ -25,6 +25,8 @@ namespace crc{
     void Add_zeros(Bin_arr &Binary, int Number_of_zeros);
 
     void Flip_binary(Bin_arr &Binary, int Shift);
+
+    Bin_arr CRC(const Bin_arr Data, const Bin_arr Polynomial);
 
 }
 

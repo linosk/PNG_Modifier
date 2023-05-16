@@ -25,6 +25,22 @@ TEST(Test_PNG_chunk,PNG_copy){
     EXPECT_TRUE(PNG_compare(Array_four,CHUNK_SIZE,CHUNK_SIZE,Array_three));
 }
 
+TEST(Test_PNG_chunk,PNG_connect){
+
+    PNG_array Array_one = {'a','b','c'};
+    PNG_array Array_two = {'d','e','f','g','h'};
+    PNG_array Array_three = {'a','b','c','d','e','f','g','h'};
+
+    //PNG_array Array_four{};
+
+    PNG_array Array_four = PNG_connect(Array_one,Array_two);
+
+    EXPECT_TRUE(PNG_compare(Array_three,0,BYTE_SIZE,Array_four));
+
+    //EXPECT_EQ(1,2);
+
+}
+
 TEST(Test_PNG_chunk,PNG_sum_chunks){
 
     PNG_array Array_one = {0x0,0x0,0x0,0xff};

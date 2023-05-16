@@ -29,24 +29,28 @@ namespace crc{
 
     }
 
-    void To_binary(int Number, int Shift, Bin_arr &Binary){
+    void To_binary(const int Number, const int Shift, Bin_arr &Binary){
         
         if (Number<0){
             std::cerr<<"ERROR"<<std::endl;
             exit(0);
         }
 
-        int Length = BYTE_SIZE + Shift*BYTE_SIZE;
-        Binary.resize(Length);
-        int Counter = 0;
+        int Number_local = Number;
 
-        while (Number)
+        std::cout<<"The number is : "+Number_local<<"\n";
+
+        //int Length = BYTE_SIZE + Shift*BYTE_SIZE;
+        //Binary.resize(Length);
+        int Counter = 0 + Shift;
+
+        while (Number_local)
         {
-            if(Number%2)
+            if(Number_local%2)
                 Binary[Counter] = 1;
             else
                 Binary[Counter] = 0;
-            Number=Number/2;
+            Number_local=Number_local/2;
             Counter++;
         }
 
@@ -89,6 +93,39 @@ namespace crc{
             else
                 Binary[i] = 1;
         }
+
+    }
+
+    Bin_arr CRC(const Bin_arr Data, const Bin_arr Polynomial){
+
+        Bin_arr Remainder{};
+        Bin_arr Tmp{};
+
+        int Data_length = Data.size();
+        int Polynomial_length = Polynomial.size();
+        int Loop_length = Data_length - Polynomial_length + 1;
+        int Remainder_length = Polynomial_length - 1;
+
+        Remainder.resize(Remainder_length);
+        Tmp.reserve(Data_length);
+        crc::Copy_binary(Data,Tmp,Data_length,0,0);
+
+        for(int i = 0;i<Loop_length;i++){
+            if(Tmp[i] == 1){
+                for(int j =0; j<Polynomial_length;j++){
+                    if(Tmp[i+j]!=Polynomial[j])
+                        Tmp[i+j] = 1;
+                    else
+                        Tmp[i+j] = 0;
+                }
+            }
+        }
+
+        for(int k = 0;k<Remainder_length;k++){
+            Remainder[k] = Tmp[k+Data_length-Remainder_length];
+        }
+
+        return Remainder;
 
     }
 

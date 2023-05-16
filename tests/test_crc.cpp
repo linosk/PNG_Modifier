@@ -87,3 +87,16 @@ TEST(TEST_crc, Flip_binary){
     EXPECT_TRUE(crc::Compare_binaries(Binary_one,Binary_two,BYTE_SIZE));
     EXPECT_TRUE(crc::Compare_binaries(Binary_three,Binary_four,BYTE_SIZE));
 }
+
+TEST(TEST_crc, CRC){
+
+    crc::Bin_arr Data = {1,0,1,1,0,1,1,1,0,0,0,0};
+    crc::Bin_arr Poly = {1,1,0,1};
+    
+    crc::Bin_arr Rem = crc::CRC(Data,Poly);
+    
+    crc::Bin_arr Rem_compare = {0,1,1};
+    
+    EXPECT_TRUE(crc::Compare_binaries(Rem,Rem_compare,Poly.size()-1));
+
+}
