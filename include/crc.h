@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 namespace crc{
     
@@ -24,9 +25,12 @@ namespace crc{
     //void Add_zeros(char* Data, int Len_of_data, int Number_of_zeros, char* New_data);
     void Add_zeros(Bin_arr &Binary, int Number_of_zeros);
 
-    void Flip_binary(Bin_arr &Binary, int Shift);
+    void Flip_binary(Bin_arr &Binary, const int Shift, const int Number_of_bits);
 
     Bin_arr CRC(const Bin_arr Data, const Bin_arr Polynomial);
+
+    //IT NEEEDS A TEST
+    uint8_t To_decimal(const int Shift, const Bin_arr Binary);
 
 }
 

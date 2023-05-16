@@ -38,10 +38,6 @@ namespace crc{
 
         int Number_local = Number;
 
-        std::cout<<"The number is : "+Number_local<<"\n";
-
-        //int Length = BYTE_SIZE + Shift*BYTE_SIZE;
-        //Binary.resize(Length);
         int Counter = 0 + Shift;
 
         while (Number_local)
@@ -85,9 +81,9 @@ namespace crc{
 
     }
 
-    void Flip_binary(Bin_arr &Binary, int Shift){
+    void Flip_binary(Bin_arr &Binary, const int Shift, const int Number_of_bits){
 
-        for(int i = Shift; i<Binary.size();i++){
+        for(int i = Shift; i<Number_of_bits;i++){
             if(Binary[i]==1)
                 Binary[i] = 0;
             else
@@ -107,7 +103,8 @@ namespace crc{
         int Remainder_length = Polynomial_length - 1;
 
         Remainder.resize(Remainder_length);
-        Tmp.reserve(Data_length);
+        Tmp.resize(Data_length);
+
         crc::Copy_binary(Data,Tmp,Data_length,0,0);
 
         for(int i = 0;i<Loop_length;i++){
@@ -129,4 +126,44 @@ namespace crc{
 
     }
 
+    uint8_t To_decimal(const int Shift, const Bin_arr Binary){
+
+        uint8_t Decimal = 0;
+
+        for(int i=0; i<BYTE_SIZE;i++){
+
+            Decimal += Binary[i+Shift]*pow(2,1);
+
+        }
+
+        return Decimal;
+
+    }
+
 }
+
+/*
+        if (Number<0){
+            std::cerr<<"ERROR"<<std::endl;
+            exit(0);
+        }
+
+        int Number_local = Number;
+
+        int Counter = 0 + Shift;
+
+        while (Number_local)
+        {
+            if(Number_local%2)
+                Binary[Counter] = 1;
+            else
+                Binary[Counter] = 0;
+            Number_local=Number_local/2;
+            Counter++;
+        }
+
+        for(int j=Counter;j<BYTE_SIZE;j++){
+            Binary[j+Shift] = 0;
+            Binary[j] = 0;
+        }
+*/

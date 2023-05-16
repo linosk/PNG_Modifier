@@ -41,12 +41,14 @@ TEST(TEST_crc, To_binary){
 
     crc::Bin_arr Binary_two{};
     crc::Bin_arr Binary_two_compare = {1,0,0,1,0,0,1,0};
+    Binary_two.resize(Binary_two_compare.size());
     crc::To_binary(73,0,Binary_two);
     EXPECT_TRUE(crc::Compare_binaries(Binary_two,Binary_two_compare,BYTE_SIZE));
 
     crc::Bin_arr Binary_three{};
     crc::Bin_arr Binary_three_compare = {0,0,0,0,1,1,1,1,0,0,0,1,0,0,0,0};
-    crc::To_binary(2288,1,Binary_three);
+    Binary_three.resize(Binary_three_compare.size());
+    crc::To_binary(2288,0,Binary_three);
     EXPECT_TRUE(crc::Compare_binaries(Binary_three,Binary_three_compare,BYTE_SIZE));
 
 }
@@ -81,8 +83,8 @@ TEST(TEST_crc, Flip_binary){
     crc::Bin_arr Binary_three = {0,0,1,1,0,1,1,0};
     crc::Bin_arr Binary_four =  {0,0,0,0,1,0,0,1};
 
-    crc::Flip_binary(Binary_one,0);
-    crc::Flip_binary(Binary_three,BYTE_SIZE/4);
+    crc::Flip_binary(Binary_one,0,Binary_one.size());
+    crc::Flip_binary(Binary_three,BYTE_SIZE/4,Binary_three.size());
 
     EXPECT_TRUE(crc::Compare_binaries(Binary_one,Binary_two,BYTE_SIZE));
     EXPECT_TRUE(crc::Compare_binaries(Binary_three,Binary_four,BYTE_SIZE));
