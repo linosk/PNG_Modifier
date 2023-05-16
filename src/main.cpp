@@ -9,9 +9,7 @@ int main(int argc, char** argv){
         exit(0);
     }
 
-    PNG_place_holder PNG;
-    PNG.PNG_get_bytes(argv[1]);
-    PNG.IHDR.PNG_get_chunk(PNG.PNG_file, PNG.IHDR_header, "IHDR", PNG.Pointer);
+    PNG_place_holder PNG(argv[1]);
 
     return 0;
 }

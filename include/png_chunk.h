@@ -14,7 +14,7 @@ typedef unsigned char PNG_byte;
 typedef std::vector<PNG_byte> PNG_array;
 
 class PNG_chunk{
-    private:
+    public:
         //PNG_byte Data_length_bytes[CHUNK_SIZE];
         //PNG_byte Type_bytes[CHUNK_SIZE];
         //PNG_byte* Chunk_data;
@@ -24,7 +24,7 @@ class PNG_chunk{
         PNG_array Type_bytes{};
         PNG_array Chunk_data{};
         PNG_array CRC_bytes{};
-    public:
+    //public:
         //void PNG_get_chunk(PNG_byte* PNG_file, PNG_byte* PNG_chunk_header, std::string PNG_header_name, size_t &Counter);
         void PNG_get_chunk(PNG_array PNG_file, const PNG_array PNG_chunk_header, std::string PNG_header_name, size_t &Counter);
 };
@@ -37,6 +37,8 @@ bool PNG_compare(const PNG_array Compare, uint8_t Beg, uint8_t Range, const PNG_
 
 //Copy from one PNG_byte array to the other in given range
 void PNG_copy(const PNG_array Copy, uint8_t Beg, uint8_t Range, PNG_array &Copy_to);
+
+PNG_array PNG_connect(const PNG_array First, const PNG_array Second);
 
 u_int32_t PNG_sum_chunks(const PNG_array Data_length_bytes);
 
