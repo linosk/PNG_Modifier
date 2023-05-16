@@ -59,5 +59,13 @@ bool PNG_place_holder::Check_CRC(const PNG_array Type_bytes, const PNG_array Chu
     }
 
     crc::Print_binary(Binary);
+    crc::Reverse_binary(Binary);
+    crc::Add_zeros(Binary, 4*BYTE_SIZE);
+    crc::Reverse_binary(Binary);
+    crc::Flip_binary(Binary,0);
+    crc::Bin_arr Rem = crc::CRC(Data,Polyniomal);
+    crc::Flip_binary(Binary,0);
+
+    //Flip_binary has to modified, take look at main.cpp in XD directory, make test for this function and fix test for test_binary
 
 }
