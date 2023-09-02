@@ -5,10 +5,70 @@
 
 PNG_place_holder::PNG_place_holder(std::string File_name){
 
+    //http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html#C.Critical-chunks
+    //https://www.youtube.com/watch?v=XyNWEWUSa5E&list=PLk6CEY9XxSIDZhQURp6d8Sgp-A0yKKDKV&ab_channel=CppNuts
+
     PNG_get_bytes(File_name);
+    std::cout<<"====="<<"\n";
+    std::cout<<Pointer<<"\n";
+    std::cout<<"====="<<"\n";
+
     IHDR.PNG_get_chunk(PNG_file,IHDR_header, "IHDR", Pointer);
-    Check_CRC(IHDR.Type_bytes,IHDR.Chunk_data,IHDR.CRC_bytes);
+    // There must be a way to indicate which chunk to CRC check
+    if (!Check_CRC(IHDR.Type_bytes,IHDR.Chunk_data,IHDR.CRC_bytes)){
+        std::cout<<""<<"\n";
+        exit(0);
+    }
+    std::cout<<"====="<<"\n";
+    std::cout<<Pointer<<"\n";
+    std::cout<<"====="<<"\n";
     
+    n1.PNG_get_chunk(PNG_file,IHDR_header,"n1",Pointer);
+    if (!Check_CRC(n1.Type_bytes,n1.Chunk_data,n1.CRC_bytes)){
+        std::cout<<""<<"\n";
+        exit(0);
+    }
+    std::cout<<"====="<<"\n";
+    std::cout<<Pointer<<"\n";
+    std::cout<<"====="<<"\n";
+
+    n2.PNG_get_chunk(PNG_file,IHDR_header,"n2",Pointer);
+    if (!Check_CRC(n2.Type_bytes,n2.Chunk_data,n2.CRC_bytes)){
+        std::cout<<""<<"\n";
+        exit(0);
+    }
+    std::cout<<"====="<<"\n";
+    std::cout<<Pointer<<"\n";
+    std::cout<<"====="<<"\n";
+
+    n3.PNG_get_chunk(PNG_file,IHDR_header,"n3",Pointer);
+    if (!Check_CRC(n3.Type_bytes,n3.Chunk_data,n3.CRC_bytes)){
+        std::cout<<""<<"\n";
+        exit(0);
+    }
+    std::cout<<"====="<<"\n";
+    std::cout<<Pointer<<"\n";
+    std::cout<<"====="<<"\n";
+    
+    n4.PNG_get_chunk(PNG_file,IHDR_header,"n4",Pointer);
+    if (!Check_CRC(n4.Type_bytes,n4.Chunk_data,n4.CRC_bytes)){
+        std::cout<<""<<"\n";
+        exit(0);
+    }
+    std::cout<<"====="<<"\n";
+    std::cout<<Pointer<<"\n";
+    std::cout<<"====="<<"\n";
+
+    //ISSUE - free(): invalid size Aborted (core dumped)
+    n5.PNG_get_chunk(PNG_file,IHDR_header,"n5",Pointer);
+    if (!Check_CRC(n5.Type_bytes,n5.Chunk_data,n5.CRC_bytes)){
+        std::cout<<""<<"\n";
+        exit(0);
+    }
+    std::cout<<"====="<<"\n";
+    std::cout<<Pointer<<"\n";
+    std::cout<<"====="<<"\n";
+
 }
 
 void PNG_place_holder::PNG_get_bytes(std::string File_name){
@@ -42,12 +102,11 @@ void PNG_place_holder::PNG_get_bytes(std::string File_name){
 
 }
 
+//Should atributes be passed as arguments to method?
 bool PNG_place_holder::Check_CRC(const PNG_array Type_bytes, const PNG_array Chunk_data, const PNG_array CRC_bytes){
 
     int Data_length = Type_bytes.size() + Chunk_data.size();
     PNG_array Data = PNG_connect(Type_bytes,Chunk_data);
-
-    PNG_print(Data);
 
     crc::Bin_arr Polyniomal = {1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,1,1,1,0,1,1,0,1,1,0,1,1,1};
     
@@ -57,47 +116,35 @@ bool PNG_place_holder::Check_CRC(const PNG_array Type_bytes, const PNG_array Chu
         crc::To_binary(Data[j],i,Binary);
     }
 
-    std::cout<<"----------------------------"<<"\n";
-
     crc::Reverse_binary(Binary);
-    crc::Print_binary(Binary);
-
-std::cout<<"----------------------------"<<"\n";
-
 
     crc::Add_zeros(Binary,4*BYTE_SIZE);
     crc::Reverse_binary(Binary);
-    crc::Print_binary(Binary);
-
-std::cout<<"----------------------------"<<"\n";
-
 
     crc::Flip_binary(Binary,0,4*BYTE_SIZE);
-    crc::Print_binary(Binary);
-
-std::cout<<"----------------------------"<<"\n";
 
     crc::Bin_arr Rem = crc::CRC(Binary,Polyniomal);
-    crc::Print_binary(Rem);
     crc::Flip_binary(Rem,0,4*BYTE_SIZE);
-    crc::Print_binary(Rem);
 
     crc::Reverse_binary(Rem);
-    crc::Print_binary(Rem);
     crc::Reverse_binary(Rem);
 
     PNG_array CRC_compare{};
     CRC_compare.resize(CHUNK_SIZE);
 
     for(int i =0, j=0;i<Data_length*BYTE_SIZE;i+=BYTE_SIZE,j++){
-        crc::To_binary(Data[j],i,Binary);
         CRC_compare[j] = crc::To_decimal(i,Rem);
     }
 
-    PNG_print(CRC_compare);
+    PNG_reverse_order(CRC_compare);
+
+    return PNG_compare(CRC_bytes,0,CHUNK_SIZE,CRC_compare);
 
     //Flip_binary has to modified, take look at main.cpp in XD directory, make test for this function and fix test for test_binary - MOSTLY DONE
     //Tests need to be corrected
-    //SOMETHING WRON
+    //SOMETHING WRONG
+    //WRITE MISSING TESTS
+    //MAKE THE OOP BETTER -- IMPORTANT
+    //READ 0THER C0MMENTS
 
 }

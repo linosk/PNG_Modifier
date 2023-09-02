@@ -31,13 +31,20 @@ TEST(Test_PNG_chunk,PNG_connect){
     PNG_array Array_two = {'d','e','f','g','h'};
     PNG_array Array_three = {'a','b','c','d','e','f','g','h'};
 
-    //PNG_array Array_four{};
-
     PNG_array Array_four = PNG_connect(Array_one,Array_two);
 
     EXPECT_TRUE(PNG_compare(Array_three,0,BYTE_SIZE,Array_four));
 
-    //EXPECT_EQ(1,2);
+}
+
+TEST(Test_PNG_chunk,PNG_reverse_order){
+
+    PNG_array Array_one = {'a','b','c','d'};
+    PNG_array Array_two = {'d','c','b','a'};
+
+    PNG_reverse_order(Array_one);
+
+    EXPECT_TRUE(PNG_compare(Array_one,0,BYTE_SIZE/2,Array_two));
 
 }
 

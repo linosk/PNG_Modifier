@@ -132,7 +132,7 @@ namespace crc{
 
         for(int i=0; i<BYTE_SIZE;i++){
 
-            Decimal += Binary[i+Shift]*pow(2,1);
+            Decimal += Binary[i+Shift]*pow(2,i);
 
         }
 

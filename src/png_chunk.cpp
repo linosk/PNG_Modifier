@@ -11,10 +11,11 @@ void PNG_chunk::PNG_get_chunk(PNG_array PNG_file, const PNG_array PNG_chunk_head
     //Copying bytes about header name and checking if it matches
     PNG_copy(PNG_file,Counter,CHUNK_SIZE,Type_bytes);
     Counter+=CHUNK_SIZE;
-    if(!PNG_compare(Type_bytes,0,CHUNK_SIZE,PNG_chunk_header)){
-        std::cerr<<PNG_header_name+" header does not match."<<"\n";
-        exit(1);
-    }
+    //Rethink this part
+    //if(!PNG_compare(Type_bytes,0,CHUNK_SIZE,PNG_chunk_header)){
+    //    std::cerr<<PNG_header_name+" header does not match."<<"\n";
+    //    exit(1);
+    //}
     PNG_print(Type_bytes);
     //
 
@@ -79,6 +80,20 @@ PNG_array PNG_connect(const PNG_array First, const PNG_array Second){
     }
 
     return New;
+}
+
+void PNG_reverse_order(PNG_array &Array){
+
+    PNG_array Tmp{};
+    Tmp.resize(Array.size());
+    PNG_copy(Array,0,Array.size(),Tmp);
+
+    for(int i=0, j =Array.size()-1;i<Array.size();i++,j--){
+
+        Array[i] = Tmp[j];
+
+    }
+
 }
 
 u_int32_t PNG_sum_chunks(const PNG_array Data_length_bytes){

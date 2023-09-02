@@ -40,6 +40,8 @@ void PNG_copy(const PNG_array Copy, uint8_t Beg, uint8_t Range, PNG_array &Copy_
 
 PNG_array PNG_connect(const PNG_array First, const PNG_array Second);
 
+void PNG_reverse_order(PNG_array &Array);
+
 u_int32_t PNG_sum_chunks(const PNG_array Data_length_bytes);
 
 #endif
