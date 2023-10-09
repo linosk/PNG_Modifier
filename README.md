@@ -11,7 +11,7 @@ Learning about PNG file structure, gtest and CMake.
 - make
   
 # Run
-./PNG_modifier
+./pngmodifier
 
-# Run tests
-./testPNG_Modifier
+# Test
+./testpngmodifier
